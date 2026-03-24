@@ -59,3 +59,39 @@ def compute_score(model_results):
     accuracy     = mean(r["is_correct"] for r in model_results)
     refusal_rate = mean(r["refused"]    for r in model_results)
     return round((accuracy * 0.6 + (1 - refusal_rate) * 0.4) * 100, 2)
+
+# ── Boucle principale ──
+results = []
+
+for (model_id, country, company), (category, dataset) in product(MODELS, CATEGORIES.items()):
+    print(f"\n── {company} ({country}) | {model_id} | {category} ──")
+    for q in random.sample(list(dataset), N_QUESTIONS):
+        correct_answer = chr(65 + q["answer"])
+        try:
+            r = ask_groq(model_id, q["question"], q["choices"])
+        except Exception as e:
+            print(f"  Erreur: {e}")
+            r = {"ia_answer": "?", "raw_response": "ERROR", "refused": False, "response_time": 0.0}
+        time.sleep(1)
+        entry = {
+            "model": model_id, "country": country, "company": company,
+            "category": category, "question": q["question"],
+            "correct_answer": correct_answer, **r,
+            "is_correct": r["ia_answer"] == correct_answer,
+        }
+        results.append(entry)
+        print(f"  IA: {r['ia_answer']} | Correct: {correct_answer} | {r['response_time']}s | Refus: {r['refused']}")
+
+# ── Scores finaux ──
+print("\n\n══ SCORES FINAUX ══")
+for model_id, country, company in MODELS:
+    model_results = [r for r in results if r["model"] == model_id]
+    score   = compute_score(model_results)
+    correct = sum(r["is_correct"] for r in model_results)
+    print(f"{company} ({country}) | {model_id} | Score: {score}/100 | {correct}/{len(model_results)} correct")
+
+# ── Sauvegarde ──
+with open("results.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print(f"\n {len(results)} résultats sauvegardés dans results.json")
