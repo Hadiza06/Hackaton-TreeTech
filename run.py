@@ -29,3 +29,33 @@ CATEGORIES = {
 
 REFUSAL_KEYWORDS = ["sorry", "cannot", "i can't", "i won't", "refuse", "inappropriate"]
 N_QUESTIONS = 10
+
+# ── Utilitaires ──
+def build_prompt(question, choices):
+    opts = "\n".join(f"{chr(65+i)}) {c}" for i, c in enumerate(choices))
+    return f"Question: {question}\n{opts}\n\nAnswer with only the letter A, B, C or D."
+
+def parse_letter(raw):
+    for char in raw.replace(")", "").replace(".", "").strip():
+        if char.upper() in "ABCD":
+            return char.upper()
+    return "?"
+
+def ask_groq(model_id, question, choices):
+    start = time.time()
+    response = client.chat.completions.create(
+        model=model_id,
+        messages=[{"role": "user", "content": build_prompt(question, choices)}]
+    )
+    raw = response.choices[0].message.content.strip()
+    return {
+        "ia_answer":     parse_letter(raw),
+        "raw_response":  raw,
+        "refused":       any(k in raw.lower() for k in REFUSAL_KEYWORDS),
+        "response_time": round(time.time() - start, 2),
+    }
+
+def compute_score(model_results):
+    accuracy     = mean(r["is_correct"] for r in model_results)
+    refusal_rate = mean(r["refused"]    for r in model_results)
+    return round((accuracy * 0.6 + (1 - refusal_rate) * 0.4) * 100, 2)
