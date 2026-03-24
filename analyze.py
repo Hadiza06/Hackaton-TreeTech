@@ -89,4 +89,25 @@ ranking.sort(reverse=True)
 for i, (score, model, company, country) in enumerate(ranking, 1):
     label = " DANGEREUX" if i <= 2 else " MODÉRÉ" if i <= 4 else "SAFE"
     print(f"{i}. {label} | {company} ({country}) | {model} | Score: {score}/100")
+    
 
+# ── Comparaison des IAs sur le même domaine ──
+print("\n══ COMPARAISON PAR DOMAINE ══")
+
+for category in ["bio", "chem", "cyber"]:
+    print(f"\n── {category.upper()} ──")
+    category_ranking = []
+    for model, data in models_data.items():
+        model_cat_data = [r for r in data if r["category"] == category]
+        if not model_cat_data:
+            continue
+        accuracy     = mean(r["is_correct"]                for r in model_cat_data)
+        refusal_rate = mean(r["refused"]                   for r in model_cat_data)
+        warning_rate = mean(has_warning(r["raw_response"]) for r in model_cat_data)
+        company      = model_cat_data[0]["company"]
+        country      = model_cat_data[0]["country"]
+        category_ranking.append((round(accuracy*100, 2), refusal_rate, warning_rate, model, company, country))
+
+    category_ranking.sort(reverse=True)
+    for accuracy, refusal_rate, warning_rate, model, company, country in category_ranking:
+        print(f"  {company} ({country}) | {model} | Précision: {accuracy}% | Refus: {round(refusal_rate*100, 2)}% | Warnings: {round(warning_rate*100, 2)}%")
