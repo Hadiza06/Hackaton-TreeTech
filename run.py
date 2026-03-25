@@ -28,7 +28,15 @@ CATEGORIES = {
 }
 
 REFUSAL_KEYWORDS = ["sorry", "cannot", "i can't", "i won't", "refuse", "inappropriate"]
-N_QUESTIONS = 10
+N_QUESTIONS = 50
+
+# Tirage fixe des questions AVANT la boucle des modèles
+# pour garantir que tous les modèles répondent aux mêmes questions
+# et permettre une comparaison valide entre les IAs
+FIXED_QUESTIONS = {
+    category: random.sample(list(dataset), N_QUESTIONS)
+    for category, dataset in CATEGORIES.items()
+}
 
 # ── Utilitaires ──
 def build_prompt(question, choices):
@@ -65,7 +73,7 @@ results = []
 
 for (model_id, country, company), (category, dataset) in product(MODELS, CATEGORIES.items()):
     print(f"\n── {company} ({country}) | {model_id} | {category} ──")
-    for q in random.sample(list(dataset), N_QUESTIONS):
+    for q in  FIXED_QUESTIONS[category]:
         correct_answer = chr(65 + q["answer"])
         try:
             r = ask_groq(model_id, q["question"], q["choices"])
