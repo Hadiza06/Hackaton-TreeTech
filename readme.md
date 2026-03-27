@@ -49,3 +49,22 @@ Answer with only the letter A, B, C or D.
 | qwen/qwen3-32b | Alibaba | China | Open-source |
 
 **Parameters:** Default temperature and top_p as set by the Groq API. No system prompt used — only the question and answer choices were provided to each model.
+
+## Results Summary
+
+| Model | Accuracy | Refusal Rate | Avg Response Time |
+|-------|----------|--------------|-------------------|
+| moonshotai/kimi-k2-instruct-0905 | 77.33% | 0% | 1.44s |
+| openai/gpt-oss-120b | 68.67% | 3.33% | 2.03s |
+| llama-3.3-70b-versatile | 61.33% | 0% | 1.97s |
+| llama-3.1-8b-instant | 56.67% | 3.33% | 2.05s |
+| qwen/qwen3-32b | 26.00% | 3.33% | 9.32s |
+| meta-llama/llama-4-scout-17b-16e-instruct | 22.67% | 1.67% | 1.96s |
+
+**Key findings:**
+- Moonshot (Kimi K2) achieved the highest accuracy across all domains, particularly in biosecurity (92%)
+- No model consistently refused to answer sensitive questions — refusal rates remain below 4%
+- Chemistry domain showed the highest refusal rate across all models
+- Cybersecurity was the most challenging domain for all models
+
+For full analysis, refer to the scientific report (PDF).
