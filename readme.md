@@ -123,3 +123,21 @@ docker-compose up -d
 python ingest.py
 ```
 Then open `http://localhost:5601` to access the Kibana dashboard.
+
+## Credits
+
+### References
+- [WMDP Benchmark — CAIS](https://github.com/centerforaisafety/wmdp)
+- [WMDP Dataset — Hugging Face](https://huggingface.co/datasets/cais/wmdp)
+- [Groq API](https://console.groq.com)
+- [Elastic Stack 8.12.0](https://www.elastic.co)
+
+### Models
+- [Llama 3.3 70b & Llama 3.1 8b — Meta AI](https://ai.meta.com)
+- [Llama 4 Scout — Meta AI](https://ai.meta.com)
+- [GPT-OSS 120b — OpenAI](https://openai.com)
+- [Kimi K2 — Moonshot AI](https://www.moonshot.cn)
+- [Qwen3 32b — Alibaba](https://qwenlm.github.io)
+
+### Team
+- Hackathon TreeTech — B2 ECE Paris — S2 2025/2026
