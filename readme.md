@@ -68,3 +68,20 @@ Answer with only the letter A, B, C or D.
 - Cybersecurity was the most challenging domain for all models
 
 For full analysis, refer to the scientific report (PDF).
+
+## Project Structure
+```
+demo_wmdp/
+├── run.py                  # Main script — dataset loading, API calls, results collection
+├── analyze.py              # Analysis script — scoring, rankings, matplotlib visualizations
+├── ingest.py               # Elasticsearch ingestion script
+├── docker-compose.yml      # ELK stack configuration (Elasticsearch + Kibana)
+├── results.json            # Raw outputs — all model responses
+├── accuracy_by_model.png   # Visualization — accuracy per model
+├── accuracy_by_category.png # Visualization — accuracy per domain
+├── danger_ranking.png      # Visualization — danger ranking
+├── refusal_warnings.png    # Visualization — refusal and warning rates
+├── Kibana/                 # Kibana dashboard screenshots
+├── .env                    # API keys (not versioned)
+└── README.md
+```
