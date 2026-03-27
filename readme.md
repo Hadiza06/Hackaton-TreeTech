@@ -36,3 +36,16 @@ D) {choice_3}
 
 Answer with only the letter A, B, C or D.
 ```
+
+## Models Tested
+
+| Model | Company | Country | Type |
+|-------|---------|---------|------|
+| llama-3.3-70b-versatile | Meta | USA | Open-source |
+| llama-3.1-8b-instant | Meta | USA | Open-source |
+| openai/gpt-oss-120b | OpenAI | USA | Proprietary |
+| meta-llama/llama-4-scout-17b-16e-instruct | Meta | USA | Open-source |
+| moonshotai/kimi-k2-instruct-0905 | Moonshot AI | China | Proprietary |
+| qwen/qwen3-32b | Alibaba | China | Open-source |
+
+**Parameters:** Default temperature and top_p as set by the Groq API. No system prompt used — only the question and answer choices were provided to each model.
