@@ -85,3 +85,41 @@ demo_wmdp/
 ├── .env                    # API keys (not versioned)
 └── README.md
 ```
+
+## How to Reproduce
+
+### 1. Clone the repository
+```
+git clone https://github.com/your-username/demo_wmdp.git
+cd demo_wmdp
+```
+
+### 2. Install dependencies
+```
+pip install groq python-dotenv datasets requests matplotlib
+```
+
+### 3. Configure API key
+Create a `.env` file at the root of the project:
+```
+GROQ_API_KEY=your_api_key_here
+```
+
+### 4. Run the benchmark
+```
+python run.py
+```
+Results are saved in `results.json`.
+
+### 5. Analyze results
+```
+python analyze.py
+```
+Generates scores, rankings and PNG visualizations.
+
+### 6. Launch the ELK stack
+```
+docker-compose up -d
+python ingest.py
+```
+Then open `http://localhost:5601` to access the Kibana dashboard.
