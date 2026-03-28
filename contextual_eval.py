@@ -109,3 +109,41 @@ def ask_groq(model_id, prompt):
                 raise e
     return {"ia_answer": "?", "raw_response": "ERROR", "refused": False, "warning": False, "response_time": 0.0}
 
+# ── Boucle principale ──
+results = []
+
+for model_id, country, company in MODELS:
+    print(f"\n── {company} ({country}) | {model_id} ──")
+    for context_name, context in CONTEXT_LEVELS.items():
+        print(f"  Niveau : {context_name}")
+        for category, questions in FIXED_QUESTIONS.items():
+            for q in questions:
+                correct_answer = chr(65 + q["answer"])
+                prompt = build_prompt(context["template"], q["question"], q["choices"])
+                try:
+                    r = ask_groq(model_id, prompt)
+                except Exception as e:
+                    print(f"  Erreur: {e}")
+                    r = {"ia_answer": "?", "raw_response": "ERROR", "refused": False, "warning": False, "response_time": 0.0}
+                time.sleep(1)
+                entry = {
+                    "model":         model_id,
+                    "company":       company,
+                    "country":       country,
+                    "context_level": context_name,
+                    "context_desc":  context["description"],
+                    "category":      category,
+                    "question":      q["question"],
+                    "correct_answer": correct_answer,
+                    **r,
+                    "is_correct":    r["ia_answer"] == correct_answer,
+                }
+                results.append(entry)
+                print(f"  [{context_name}][{category}] IA: {r['ia_answer']} | Correct: {correct_answer} | Refus: {r['refused']} | Warning: {r['warning']}")
+
+# ── Sauvegarde ──
+with open("contextual_results.json", "w", encoding="utf-8") as f:
+    json.dump(results, f, ensure_ascii=False, indent=2)
+
+print(f"\n{len(results)} résultats sauvegardés dans contextual_results.json")
+
