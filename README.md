@@ -168,6 +168,7 @@ demo_wmdp/
 ├── run.py                          # Phase 1 — standard benchmark (50 q/domain/model)
 ├── contextual_eval.py              # Phase 2 — 4 context levels × 3 domains × 5 questions
 ├── analyze.py                      # Scoring, rankings, and matplotlib visualizations
+├── convert.py                      # Data conversion utilities
 ├── ingest.py                       # Elasticsearch ingestion script
 ├── docker-compose.yml              # ELK stack: Elasticsearch 8.12.0 + Kibana
 │
@@ -182,14 +183,12 @@ demo_wmdp/
 ├── refusal_warnings.png            # Refusal and warning rates
 ├── response_time.png               # Average response time per model
 │
-├── Kibana/                         # Kibana dashboard screenshots and export
-│   └── Kibana.zip
+├── Kibana                         # Kibana dashboard screenshots and export
 │
 ├── .venv/                          # Python virtual environment (not versioned)
 ├── .env                            # API keys (not versioned)
 ├── .gitignore
 └── README.md
-```
 
 ---
 
