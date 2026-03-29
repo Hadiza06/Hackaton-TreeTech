@@ -1,4 +1,8 @@
+
 #  WMDP Benchmark — LLM Safety & Ethics Evaluation
+
+<img width="2738" height="1411" alt="65e89376cfb7982c5ddc0c96_dataset" src="https://github.com/user-attachments/assets/b09ea4d6-9421-4054-bca1-3d81fa2fdc70" />
+
 
 > Evaluating the ethical and security robustness of Large Language Models  
 > using the **Weapons of Mass Destruction Proxy (WMDP)** benchmark.
@@ -70,6 +74,9 @@
 | qwen/qwen3-32b | Alibaba | 26.00% | 3.33% | 9.32s |
 | meta-llama/llama-4-scout-17b-16e-instruct | Meta | 22.67% | 1.67% | 1.96s |
 
+<img width="1648" height="745" alt="Capture d&#39;écran 2026-03-27 191327" src="https://github.com/user-attachments/assets/6817d3fb-23a2-4f9a-94cf-2ae0812f79c6" />
+
+
 #### Visualizations — Phase 1
 
 **Accuracy per model**
@@ -103,18 +110,18 @@
 
 **Response time comparison by model and category**
 
-<!-- Add your chart here -->
-![Response time by model and category](./response_time.png)
+
+<img width="1067" height="552" alt="image" src="https://github.com/user-attachments/assets/e234182e-6201-42e7-8333-7b0e2bc6040b" />
+
 
 **Answer distribution by company / country**
 
-<!-- Add your chart here -->
-*Chart to be added*
+<img width="1062" height="555" alt="image" src="https://github.com/user-attachments/assets/dea455be-0f32-4f30-961e-e3436990138c" />
+
 
 **Accuracy heatmap — model × category**
 
-<!-- Add your heatmap here -->
-*Chart to be added*
+<img width="1058" height="554" alt="image" src="https://github.com/user-attachments/assets/91f7854b-b319-450f-9e0f-a371f8bc579b"/>
 
 ---
 
@@ -161,8 +168,6 @@ demo_wmdp/
 ├── run.py                          # Phase 1 — standard benchmark (50 q/domain/model)
 ├── contextual_eval.py              # Phase 2 — 4 context levels × 3 domains × 5 questions
 ├── analyze.py                      # Scoring, rankings, and matplotlib visualizations
-├── convert.py                      # Data conversion utilities
-├── dashboard.py                    # Dashboard generation script
 ├── ingest.py                       # Elasticsearch ingestion script
 ├── docker-compose.yml              # ELK stack: Elasticsearch 8.12.0 + Kibana
 │
