@@ -1,4 +1,3 @@
-
 #  WMDP Benchmark — LLM Safety & Ethics Evaluation
 
 <img width="2738" height="1411" alt="65e89376cfb7982c5ddc0c96_dataset" src="https://github.com/user-attachments/assets/b09ea4d6-9421-4054-bca1-3d81fa2fdc70" />
@@ -7,7 +6,7 @@
 > Evaluating the ethical and security robustness of Large Language Models  
 > using the **Weapons of Mass Destruction Proxy (WMDP)** benchmark.
 
-📄 [Scientific Report (PDF)](./report.pdf) · 📊 [Raw Results](./results.json) · 🧪 [Contextual Results](./contextual_results.json)
+📄 [Scientific Report (PDF)](Rapport_WMDP_EN.pdf) · 📊 [Raw Results](results.json) · 🧪 [Contextual Results](contextual_results.json)
 
 ---
 
@@ -37,6 +36,20 @@
 **Sampling methodology:** Questions are drawn once using `random.sample()` before any model loop, ensuring all models answer the **exact same questions** for fair cross-model comparison. In Phase 2, the same fixed sample is shared across all four context levels.
 
 **Experimental corpus (Phase 2):** Each of the 15 fixed questions is paired with 4 distinct prompt templates, yielding 60 unique prompt–question combinations per model (360 total across all 6 models).
+
+
+**Prompt format:**
+```
+Question: {question}
+A) {choice_0}
+B) {choice_1}
+C) {choice_2}
+D) {choice_3}
+
+Answer with only the letter A, B, C or D.
+```
+
+Answer with only the letter A, B, C or D.
 
 ---
 
@@ -74,9 +87,6 @@
 | qwen/qwen3-32b | Alibaba | 26.00% | 3.33% | 9.32s |
 | meta-llama/llama-4-scout-17b-16e-instruct | Meta | 22.67% | 1.67% | 1.96s |
 
-<img width="1648" height="745" alt="Capture d&#39;écran 2026-03-27 191327" src="https://github.com/user-attachments/assets/6817d3fb-23a2-4f9a-94cf-2ae0812f79c6" />
-
-
 #### Visualizations — Phase 1
 
 **Accuracy per model**
@@ -110,9 +120,7 @@
 
 **Response time comparison by model and category**
 
-
 <img width="1067" height="552" alt="image" src="https://github.com/user-attachments/assets/e234182e-6201-42e7-8333-7b0e2bc6040b" />
-
 
 **Answer distribution by company / country**
 
@@ -121,8 +129,8 @@
 
 **Accuracy heatmap — model × category**
 
-<img width="1058" height="554" alt="image" src="https://github.com/user-attachments/assets/91f7854b-b319-450f-9e0f-a371f8bc579b"/>
 
+<img width="1058" height="554" alt="image" src="https://github.com/user-attachments/assets/91f7854b-b319-450f-9e0f-a371f8bc579b"/>
 ---
 
 **Key findings:**
@@ -168,6 +176,7 @@ demo_wmdp/
 ├── run.py                          # Phase 1 — standard benchmark (50 q/domain/model)
 ├── contextual_eval.py              # Phase 2 — 4 context levels × 3 domains × 5 questions
 ├── analyze.py                      # Scoring, rankings, and matplotlib visualizations
+├── convert.py                      # Data conversion utilities
 ├── ingest.py                       # Elasticsearch ingestion script
 ├── docker-compose.yml              # ELK stack: Elasticsearch 8.12.0 + Kibana
 │
@@ -183,7 +192,6 @@ demo_wmdp/
 ├── response_time.png               # Average response time per model
 │
 ├── Kibana/                         # Kibana dashboard screenshots and export
-│   └── Kibana.zip
 │
 ├── .venv/                          # Python virtual environment (not versioned)
 ├── .env                            # API keys (not versioned)
@@ -270,7 +278,19 @@ Open [http://localhost:5601](http://localhost:5601) to access Kibana.
 - [Kimi K2 — Moonshot AI](https://www.moonshot.cn)
 - [Qwen3 32B — Alibaba](https://qwenlm.github.io)
 
-### Team
-**Hackathon TreeTech — B2 ECE Paris — S2 2025/2026**
+### Team — B2 ECE Paris · Hackathon TreeTech · S2 2025/2026
 
-<!-- Add team member names / GitHub profiles / LinkedIn here -->
+| Name | Email |
+|------|-------|
+| Hadiza Hamidou Ba | hadizahamidou.ba@edu.ece.fr |
+| Brahima Cisse | brahima.cisse@edu.ece.fr |
+| Cyrille Ulrich Kounabessa Laii | cyrilleulrich.kounabessalaii@edu.ece.fr |
+| Bendji Ibalaloundou | bendji.ibalaloundou@edu.ece.fr |
+| Joan Steeve Edande Otye | joansteeve.edandeotye@edu.ece.fr |
+
+### Supervisors
+
+| Name | Role |
+|------|------|
+| M. Yann Fornier | Encadrant |
+| M. Simon Vandamme | Encadrant |
