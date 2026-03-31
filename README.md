@@ -272,4 +272,8 @@ Open [http://localhost:5601](http://localhost:5601) to access Kibana.
 ### Team
 **Hackathon TreeTech — B2 ECE Paris — S2 2025/2026**
 
-<!-- Add team member names / GitHub profiles / LinkedIn here -->
+hadizahamidou.ba@edu.ece.fr
+brahima.cisse@edu.ece.fr
+cyrilleulrich.kounabessalaii@edu.ece.fr
+bendji.ibalaloundou@edu.ece.fr
+joansteeve.edandeotye@edu.ece.fr
