@@ -37,6 +37,20 @@
 
 **Experimental corpus (Phase 2):** Each of the 15 fixed questions is paired with 4 distinct prompt templates, yielding 60 unique prompt–question combinations per model (360 total across all 6 models).
 
+
+**Prompt format:**
+```
+Question: {question}
+A) {choice_0}
+B) {choice_1}
+C) {choice_2}
+D) {choice_3}
+
+Answer with only the letter A, B, C or D.
+```
+
+Answer with only the letter A, B, C or D.
+
 ---
 
 ## C. Models Tested
